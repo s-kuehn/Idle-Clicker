@@ -2,44 +2,100 @@
 <html lang="en">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messing Around</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-    <!-- <h1>Click The Button</h1> -->
+    <img id="background-img" src="./img/Background.png" alt="">
 
-    <h1 class="score">Score: 0</h1>
+    <div class = 'main-container'>
 
-    <button class="main-button">Click Me!</button>
+        <h1 class="score">Score: 0</h1>
 
-    <h4>Upgrade Shop</h4>
+        <div class="balloon"></div>
 
-    <div class="shop-container">
-        <div class="shop-listing">
-            <p class="upgrade-desc">Plus 2 every click!</p>
-            <p class="upgrade-cost"> $<span class="value">10</span></p>
-            <button class="buy-btn">Buy</button>
-        </div>
+        <!-- <button class="main-button">Click Me!</button> -->
 
-        <div class="shop-listing">
-            <p class="upgrade-desc">Auto +1 every 2 seconds!</p>
-            <p class="upgrade-cost"> $<span class="value">100</span></p>
-            <button class="buy-btn">Buy</button>
-        </div>
+        <h4 class="title">Upgrade Shop</h4>
 
-        <div class="shop-listing">
-            <p class="upgrade-desc">Plus 2 every click!</p>
-            <p class="upgrade-cost"> $<span class="value">1000</span></p>
-            <button class="buy-btn">Buy</button>
+        <div class="shop-container">
+            <div class="shop-listing">
+                <p class="upgrade-desc">Plus 2 every click!</p>
+                <p class="upgrade-cost"> $<span class="value">10</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Auto +1 every second!</p>
+                <p class="upgrade-cost"> $<span class="value">50</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Plus 3 every click!</p>
+                <p class="upgrade-cost"> $<span class="value">130</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Auto +2 every second!</p>
+                <p class="upgrade-cost"> $<span class="value">210</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">10% chance to double your score per click!</p>
+                <p class="upgrade-cost"> $<span class="value">340</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Plus 5 every click!</p>
+                <p class="upgrade-cost"> $<span class="value">550</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Auto +3 every second!</p>
+                <p class="upgrade-cost"> $<span class="value">890</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Plus 8 every click!</p>
+                <p class="upgrade-cost"> $<span class="value">1440</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Auto +5 every second!</p>
+                <p class="upgrade-cost"> $<span class="value">2330</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
+            <div class="shop-listing">
+                <p class="upgrade-desc">Plus 13 every click!</p>
+                <p class="upgrade-cost"> $<span class="value">3770</span></p>
+                <button class="buy-btn">Buy</button>
+            </div>
+
         </div>
 
     </div>
+
+    
 
     <script src="./app.js"></script>
 </body>

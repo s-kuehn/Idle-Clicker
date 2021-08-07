@@ -1,59 +1,148 @@
+const html = document.querySelector('html');
+
+const balloon = document.querySelector('.balloon');
+
 const button = document.querySelector('button');
 const scoreDisplay = document.querySelector('.score');
 const shopListing = document.querySelector('.shop-listing');
-const upgradeBuyBtn = document.querySelector('.buy-btn');
-const upgradeCost = document.querySelector('.value');
+const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
+const upgradeCost = document.querySelectorAll('.value');
 const shopContainer = document.querySelector('.shop-container');
 
-let score = 110;
-let autoIncrementAmt = 2;
-let AutoIncrementing = false;
+let score = 0;
+let incrementAmt = 1;
+let autoIncrementAmt = 0;
+let luckUpgrade = true;
 
 scoreDisplay.textContent = `Score: ${score}`
 
-AutoIncrementing = true;
+updateShopListings()
+
+setInterval(incrementScore, 1000);
 
 
+function applyUpgrades(upgradeNum) {
+    switch (upgradeNum) {
+        case 0:
+            console.log('Plus two each click!');
+            incrementAmt = 2;
+            break;
+        case 1:
+            console.log('Auto increment by 1 each second!');
+            autoIncrementAmt = 1;
+            break;
+        case 2:
+            console.log('Plus three each click!');
+            incrementAmt = 3;
+            break;
+        case 3:
+            console.log('Auto increment by 2 each second!');
+            autoIncrementAmt = 2;
+            break;
+        case 4:
+            console.log('10% chance to double your click score!')
+            luckUpgrade = true;
+        case 5:
+            console.log('Plus five each click!');
+            incrementAmt = 5;
+            break;
+        case 6:
+            console.log('Auto increment by 3 each second!');
+            autoIncrementAmt = 3;
+            break;
+        case 7:
+            console.log('Plus eight each click!');
+            incrementAmt = 8;
+            break;
+        case 8:
+            console.log('Auto increment by five each second!');
+            autoIncrementAmt = 5;
+            break;
+        case 9:
+            console.log('Plus thirteen each click!');
+            incrementAmt = 13;
+            break;
+    }
+}
 
-// if (score >= shopContainer[i].price) {
-//     null
-// }
-
-
-
-function incrementScore(amount) {
-    score += Number(amount);
+function incrementScore() {
+    score += Number(autoIncrementAmt);
     scoreDisplay.textContent = `Score: ${score}`;
+    updateShopListings();
 }
 
-const shopItems = document.querySelectorAll('.shop-listing');
+function updateShopListings() {
+    const shopItems = document.querySelectorAll('.shop-listing');
 
-for (let i = 0; i < shopItems.length; i++) {
+    shopItems.forEach( (elem) => {
+        const shopItemPrice = elem.querySelector('.value').textContent;
 
-    const shopItemPrice = shopItems[i].querySelector('.value').textContent;
+        console.log(shopItemPrice);
 
-    console.log(shopItemPrice);
+        if (score <= shopItemPrice * .75 && !elem.classList.contains('line-through')) {
+            elem.classList.add('hide');
+        } else {
+            elem.classList.remove('hide');
+        }
 
-    if (score >= shopItemPrice * .25) {
-        // shop
+    });
+}
+
+upgradeBuyBtn.forEach( (elem, i) => {
+
+    // Upgrade cost
+    const elemCost = elem.parentNode.childNodes[3].childNodes[1].textContent;
+
+    // Upgrade listing
+    const elemListing = elem.parentNode;
+
+    elem.addEventListener('click', () => {
+        console.log('Hello World!', i);
+        if (score >= Number(elemCost)) {
+            score -= Number(elemCost);
+            scoreDisplay.textContent = `Score: ${score}`
+            elemListing.classList.add('line-through');
+            elem.parentNode.childNodes[3].classList.add('hide');
+            elem.remove();
+
+            applyUpgrades(i);
+
+        }
+    });
+});
+
+// upgradeBuyBtn.addEventListener('click', () => {
+//     console.log('test!!!');
+//     if (score >= Number(upgradeCost.textContent)) {
+//         shopListing.classList.add('hide');
+//     }
+// });
+
+// setInterval(incrementScore, 1000, [autoIncrementAmt]);
+
+balloon.addEventListener('click', () => {
+    balloon.classList.add('balloon-popped');
+    
+    function balloonPop() {
+        balloon.classList.remove('balloon-popped')
     }
 
-}
+    setTimeout(balloonPop,50);
 
-
-
-
-upgradeBuyBtn.addEventListener('click', () => {
-    if (score >= Number(upgradeCost.textContent)) {
-        shopListing.classList.add('hide');
+    const randInt = Math.random();
+    console.log(randInt);
+    if (luckUpgrade && randInt < 0.10) {
+        html.classList.add('double-score');
+        const doubleInc = incrementAmt * 2
+        scoreDisplay.textContent = `Score: ${score += doubleInc}`;
+    } else {
+        html.classList.remove('double-score');
+        scoreDisplay.textContent = `Score: ${score += incrementAmt}`
     }
-})
+    updateShopListings();
 
-
-if (AutoIncrementing) {
-    setInterval(incrementScore, 1000, [autoIncrementAmt]);
-}
+});
 
 button.addEventListener('click', () => {
-    scoreDisplay.textContent = `Score: ${score += 1}`
-})
+    null;
+});
