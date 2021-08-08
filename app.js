@@ -2,23 +2,26 @@ const html = document.querySelector('html');
 
 const balloon = document.querySelector('.balloon');
 
-const button = document.querySelector('button');
+// const button = document.querySelector('button');
 const scoreDisplay = document.querySelector('.score');
-const shopListing = document.querySelector('.shop-listing');
-const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
+const shopListings = document.querySelectorAll('.shop-listing');
+// const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
+// const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
+
 const upgradeCost = document.querySelectorAll('.value');
 const shopContainer = document.querySelector('.shop-container');
 
 let score = 0;
 let incrementAmt = 1;
 let autoIncrementAmt = 0;
-let luckUpgrade = true;
+let luckUpgrade = false;
 
 scoreDisplay.textContent = `Score: ${score}`
 
 updateShopListings()
 
-setInterval(incrementScore, 1000);
+// Update score
+let scoreUpdater = setInterval(incrementScore, 1000);
 
 
 function applyUpgrades(upgradeNum) {
@@ -26,10 +29,12 @@ function applyUpgrades(upgradeNum) {
         case 0:
             console.log('Plus two each click!');
             incrementAmt = 2;
+            scoreUpdater = setInterval(incrementScore, 500);
             break;
         case 1:
             console.log('Auto increment by 1 each second!');
             autoIncrementAmt = 1;
+            scoreUpdater = setInterval(incrementScore, 250);
             break;
         case 2:
             console.log('Plus three each click!');
@@ -38,6 +43,7 @@ function applyUpgrades(upgradeNum) {
         case 3:
             console.log('Auto increment by 2 each second!');
             autoIncrementAmt = 2;
+            scoreUpdater = setInterval(incrementScore, 125);
             break;
         case 4:
             console.log('10% chance to double your click score!')
@@ -77,7 +83,7 @@ function updateShopListings() {
     shopItems.forEach( (elem) => {
         const shopItemPrice = elem.querySelector('.value').textContent;
 
-        console.log(shopItemPrice);
+        // console.log(shopItemPrice);
 
         if (score <= shopItemPrice * .75 && !elem.classList.contains('line-through')) {
             elem.classList.add('hide');
@@ -88,28 +94,55 @@ function updateShopListings() {
     });
 }
 
-upgradeBuyBtn.forEach( (elem, i) => {
+shopListings.forEach( (elem, i) => {
 
     // Upgrade cost
-    const elemCost = elem.parentNode.childNodes[3].childNodes[1].textContent;
+    const elemCost = elem.childNodes[3].childNodes[1].textContent;
 
     // Upgrade listing
-    const elemListing = elem.parentNode;
+    // const elemListing = elem.parentNode;
 
     elem.addEventListener('click', () => {
         console.log('Hello World!', i);
         if (score >= Number(elemCost)) {
             score -= Number(elemCost);
             scoreDisplay.textContent = `Score: ${score}`
-            elemListing.classList.add('line-through');
-            elem.parentNode.childNodes[3].classList.add('hide');
-            elem.remove();
+            elem.classList.add('line-through');
+            elem.childNodes[3].classList.add('hide');
+            // elem.remove();
 
             applyUpgrades(i);
 
         }
     });
 });
+
+
+
+
+// upgradeBuyBtn.forEach( (elem, i) => {
+
+//     // Upgrade cost
+//     const elemCost = elem.parentNode.childNodes[3].childNodes[1].textContent;
+
+//     // Upgrade listing
+//     const elemListing = elem.parentNode;
+
+//     elem.addEventListener('click', () => {
+//         console.log('Hello World!', i);
+//         if (score >= Number(elemCost)) {
+//             score -= Number(elemCost);
+//             scoreDisplay.textContent = `Score: ${score}`
+//             elemListing.classList.add('line-through');
+//             elem.parentNode.childNodes[3].classList.add('hide');
+//             elem.remove();
+
+//             applyUpgrades(i);
+
+//         }
+//     });
+// });
+
 
 // upgradeBuyBtn.addEventListener('click', () => {
 //     console.log('test!!!');
@@ -143,6 +176,6 @@ balloon.addEventListener('click', () => {
 
 });
 
-button.addEventListener('click', () => {
-    null;
-});
+// button.addEventListener('click', () => {
+//     null;
+// });

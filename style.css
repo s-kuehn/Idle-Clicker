@@ -46,15 +46,6 @@ body {
 }
 
 .balloon {
-    /* position: relative;
-    top: 30%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%); */
-    /* display: block;
-    margin: 0 auto;
-    width: 300px;
-    height: 400px; */
     height: 80%;
     width: 360px;
     background-position: center;
@@ -64,15 +55,6 @@ body {
 }
 
 .balloon-popped {
-    /* position: relative;
-    top: 30%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%); */
-    /* display: block;
-    margin: 0 auto;
-    width: 300px;
-    height: 400px; */
     height: 80%;
     width: 360px;
     background-position: center;
@@ -82,20 +64,15 @@ body {
 }
 
 .shop-container {
-    /* position: relative;
-    top: 11%;
-    -webkit-transform: translateY(-11%);
-    -ms-transform: translateY(-11%);
-    transform: translateY(-11%); */
     width: fit-content;
     margin: 0 auto;
     padding: 0 10px;
-    background-color: #a4653c;
     border-radius: 20px;
     color: #573420;
+    background-color: rgba(164, 101, 60, 0.80);
     border: solid 5px;
     height: 320px;
-    /* overflow-y: auto; */
+    margin-bottom: 10px;
 }
 
 .shop-listing-container {
@@ -105,8 +82,8 @@ body {
 
 .title {
     margin: 15px 0;
-    font-size: 20px;
-    color: #573420;
+    font-size: 24px;
+    color: #FAFAFA;
 }
 
 .upgrade-cost {
@@ -121,9 +98,17 @@ body {
     padding: 10px;
     display: flex;
     align-items: center;
-    color: #b46f38;
-    background-color: #cb9d61;
+    color: #FAFAFA;
+    background-color: rgba(203, 157, 97, 0.70);
     border-radius: 20px;
+}
+
+.shop-listing:hover {
+    background-color: rgb(203, 157, 97);
+}
+
+.shop-listing:active {
+    background-color: rgb(160, 122, 73);
 }
 
 .hide {
@@ -131,11 +116,17 @@ body {
 }
 
 .line-through {
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
+    background-color: rgba(184, 161, 131, 0.7);
 }
 
-/* .double-score {
-} */
+.line-through:hover {
+    background-color: rgba(184, 161, 131, 0.7);
+}
+
+.line-through:active {
+    background-color: rgba(184, 161, 131, 0.7);
+}
 
 .main-button {
     width: 200px;
@@ -158,3 +149,26 @@ body {
 .main-button:active{
     background-color: #d14d36;
 }
+
+
+/* -------- SCROLL BAR STYLING -------- */
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #573420
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(203, 157, 97, 0.70);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
