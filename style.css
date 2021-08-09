@@ -5,17 +5,11 @@
 }
 
 html {
-    /* animation: day-night 5s; */
     margin-top: 0;
     text-align: center;
-    /* Day */
-    /* background-color: #0099db; */
-    /* Night */
-    /* background-color: #15141a; */
     color: #FAFAFA;
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
-    /* animation: dayNight 10s infinite alternate; */
 }
 
 
@@ -29,7 +23,6 @@ html {
     background-color: #19162b;
     transition: background-color 5s;
 }
-
 
 
 body {
@@ -71,29 +64,15 @@ body {
     transition: opacity 5s;
 }
 
-/* @keyframes stars {
-    from {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 0.6;
-    }
+.day-clouds {
+    filter: brightness(1);
+    transition: filter 5s;
 }
 
-@keyframes dayNight {
-    from {
-        background-color: #0099db;
-    }
-
-    to {
-        background-color: #15141a;
-    }
-} */
+.night-clouds {
+    filter: brightness(0.5);
+    transition: filter 5s;
+}
 
 .main-container {
     height: 100%;
@@ -167,7 +146,6 @@ body {
 .shop-listing {
     height: 48px;
     max-width: 600px;
-    /* justify-content: center; */
     margin: 10px 0;
     padding: 10px;
     display: flex;
@@ -180,10 +158,6 @@ body {
 .shop-listing p {
     margin-left: auto;
 }
-
-/* .shop-listing:not(:nth-child(2)) .upgrade-cost {
-    margin-left: 30px;
-} */
 
 .shop-listing:hover {
     background-color: rgb(203, 157, 97);
@@ -198,7 +172,6 @@ body {
 }
 
 .line-through {
-    /* text-decoration: line-through; */
     background-color: rgba(184, 161, 131, 0.7);
 }
 
@@ -262,13 +235,8 @@ body {
 
 .clouds {
     position: absolute;
-    opacity: 0.6;
     z-index: -1;
 }
-
-/* .cloud img{
-    width: 50%;
-} */
 
 
 @-webkit-keyframes animateCloud {
@@ -292,24 +260,16 @@ body {
 @keyframes animateCloud {
     0% {
         margin-left: -1000px;
-        /* transform: translateX(-1000px); */
     }
     100% {
         margin-left: 100%;
-        /* transform: translateX(1000px); */
     }
 }
-
-
-/* .clouds img {
-    position: absolute;
-} */
 
 
 #background-wrap {
     bottom: 0;
 	left: 0;
-	/* padding-top: 50px; */
 	position: fixed;
 	right: 0;
 	top: 0;

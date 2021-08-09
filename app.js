@@ -8,6 +8,7 @@ const scoreDisplay = document.querySelector('.score');
 const shopListings = document.querySelectorAll('.shop-listing');
 
 const stars = document.querySelector('#stars-img');
+const clouds = document.querySelectorAll('.clouds');
 
 const upgradeCost = document.querySelectorAll('.value');
 const shopContainer = document.querySelector('.shop-container');
@@ -35,7 +36,6 @@ function applyUpgrades(upgradeNum) {
             incrementAmt *= 2;
             // Update amount per click
             shopListings[0].childNodes[1].textContent = `+${incrementAmt * 2} every pop!`;
-            // scoreUpdater = setInterval(incrementScore, 500);
             break;
 
         // Add more auto poppers
@@ -48,8 +48,6 @@ function applyUpgrades(upgradeNum) {
             }
             shopListings[1].childNodes[1].textContent = `+${Math.ceil(autoIncrementAmt * 1.1)} auto poppers!`;
             shopListings[1].childNodes[7].innerHTML = `| ${autoIncrementAmt}`
-            // shopListings[1].childNodes[5].childNodes[1].innerHTML = `${autoIncrementAmt}`
-            // scoreUpdater = setInterval(incrementScore, 250);
             break;
             
         // 10% chance of double points on click
@@ -124,16 +122,13 @@ shopListings.forEach( (elem, i) => {
             score -= Number(elemCost);
 
             // Calculate new upgrade price
-            elem.childNodes[3].childNodes[1].innerHTML = `${Math.ceil(elemCostOriginal * (1.1) ** (elemAmt+1)) + ((elemAmt+5)*15)}`;
+            elem.childNodes[3].childNodes[1].innerHTML = `${Math.ceil(elemCostOriginal * (1.15) ** (elemAmt+1)) + ((elemAmt+5)*15)}`;
 
             // Update number of upgrades purchased
             elem.childNodes[5].childNodes[1].innerHTML = `${Number(elemAmt) + 1}`
 
-            // console.log(elemCost)
             scoreDisplay.textContent = `Score: ${score}`
             elem.classList.add('line-through');
-            // elem.childNodes[3].classList.add('hide');
-            // elem.remove();
 
             applyUpgrades(i);
 
@@ -145,6 +140,10 @@ shopListings.forEach( (elem, i) => {
 setInterval(() => {
     body.classList.toggle('night-sky');
     stars.classList.toggle('night-stars');
+
+    clouds.forEach( (elem) => {
+        elem.classList.toggle('night-clouds');
+    });
 
     if (body.classList.contains('night-sky')) {
         console.log('Night!');
