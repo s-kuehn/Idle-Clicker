@@ -1,15 +1,18 @@
 'use strict';
 
 const html = document.querySelector('html');
+const body = document.querySelector('body');
 
 const balloon = document.querySelector('.balloon');
 const scoreDisplay = document.querySelector('.score');
 const shopListings = document.querySelectorAll('.shop-listing');
 
+const stars = document.querySelector('#stars-img');
+
 const upgradeCost = document.querySelectorAll('.value');
 const shopContainer = document.querySelector('.shop-container');
 
-let score = 10000;
+let score = 0;
 let incrementAmt = 1;
 let autoIncrementAmt = 0;
 let luckUpgradePercent = 0;
@@ -106,7 +109,7 @@ function updateShopListings() {
 
 shopListings.forEach( (elem, i) => {
 
-    
+
     const elemCostOriginal = elem.childNodes[3].childNodes[1].textContent;
 
     elem.addEventListener('click', () => {
@@ -137,6 +140,18 @@ shopListings.forEach( (elem, i) => {
         }
     });
 });
+
+
+setInterval(() => {
+    body.classList.toggle('night-sky');
+    stars.classList.toggle('night-stars');
+
+    if (body.classList.contains('night-sky')) {
+        console.log('Night!');
+    } else {
+        console.log('Day!');
+    }
+}, 60000);
 
 
 balloon.addEventListener('click', () => {
