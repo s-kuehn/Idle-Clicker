@@ -34,7 +34,7 @@ function applyUpgrades(upgradeNum) {
             // Increase increment amount exponentially
             incrementAmt *= 2;
             // Update amount per click
-            shopListings[0].childNodes[1].textContent = `+${incrementAmt * 2} every click!`;
+            shopListings[0].childNodes[1].textContent = `+${incrementAmt * 2} every pop!`;
             // scoreUpdater = setInterval(incrementScore, 500);
             break;
 
