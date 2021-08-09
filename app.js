@@ -1,17 +1,15 @@
+'use strict';
+
 const html = document.querySelector('html');
 
 const balloon = document.querySelector('.balloon');
-
-// const button = document.querySelector('button');
 const scoreDisplay = document.querySelector('.score');
 const shopListings = document.querySelectorAll('.shop-listing');
-// const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
-// const upgradeBuyBtn = document.querySelectorAll('.buy-btn');
 
 const upgradeCost = document.querySelectorAll('.value');
 const shopContainer = document.querySelector('.shop-container');
 
-let score = 1000;
+let score = 10000;
 let incrementAmt = 1;
 let autoIncrementAmt = 0;
 let luckUpgradePercent = 0;
@@ -40,7 +38,14 @@ function applyUpgrades(upgradeNum) {
         // Add more auto poppers
         case 1:
             console.log('Auto increment by 1 each second!');
-            autoIncrementAmt += 1;
+            if (autoIncrementAmt === 0) {
+                autoIncrementAmt += 1
+            } else {
+                autoIncrementAmt = autoIncrementAmt + Math.ceil(autoIncrementAmt * 1.1);
+            }
+            shopListings[1].childNodes[1].textContent = `+${Math.ceil(autoIncrementAmt * 1.1)} auto poppers!`;
+            shopListings[1].childNodes[7].innerHTML = `| ${autoIncrementAmt}`
+            // shopListings[1].childNodes[5].childNodes[1].innerHTML = `${autoIncrementAmt}`
             // scoreUpdater = setInterval(incrementScore, 250);
             break;
             
@@ -59,10 +64,17 @@ function applyUpgrades(upgradeNum) {
         
         // Cut interval rate in half
         case 3:
-            // console.log('Auto increment by 2 each second!');
-            // autoIncrementAmt = 2;
-            autoIncrementSpeed /= 2
+
+            function calcNextSubSpeed() {
+                const speedDecreaseRate = autoIncrementSpeed * 1.1;
+                return Math.ceil(speedDecreaseRate - autoIncrementSpeed);
+            }
+
+            autoIncrementSpeed -= calcNextSubSpeed();
             scoreUpdater = setInterval(incrementScore, autoIncrementSpeed);
+            console.log(autoIncrementSpeed)
+            shopListings[3].childNodes[1].textContent = `-${calcNextSubSpeed()}ms speed up auto pop rate!`;
+            // }
             break;
     }
 }
@@ -79,11 +91,7 @@ function updateShopListings() {
     shopItems.forEach( (elem) => {
         const shopItemPrice = elem.querySelector('.value').textContent;
 
-        // console.log(shopItemPrice);
-
-        if (score <= shopItemPrice * .75 && !elem.classList.contains('line-through')) {
-            elem.classList.add('hide');
-        } else {
+        if (score >= shopItemPrice * .75) {
             elem.classList.remove('hide');
         }
 
@@ -98,9 +106,7 @@ function updateShopListings() {
 
 shopListings.forEach( (elem, i) => {
 
-    // Upgrade listing
-    // const elemListing = elem.parentNode;
-
+    
     const elemCostOriginal = elem.childNodes[3].childNodes[1].textContent;
 
     elem.addEventListener('click', () => {
@@ -110,12 +116,12 @@ shopListings.forEach( (elem, i) => {
         const elemAmt = elem.childNodes[5].childNodes[1].textContent;
 
         console.log('Hello World!', i);
-        console.log(elemCost)
+        console.log(elemCost, elemAmt)
         if (score >= Number(elemCost)) {
             score -= Number(elemCost);
 
             // Calculate new upgrade price
-            elem.childNodes[3].childNodes[1].innerHTML = `${Math.ceil(elemCostOriginal * (1.1) ** (elemAmt+1)) + ((elemAmt+5)*10)}`;
+            elem.childNodes[3].childNodes[1].innerHTML = `${Math.ceil(elemCostOriginal * (1.1) ** (elemAmt+1)) + ((elemAmt+5)*15)}`;
 
             // Update number of upgrades purchased
             elem.childNodes[5].childNodes[1].innerHTML = `${Number(elemAmt) + 1}`
@@ -132,41 +138,6 @@ shopListings.forEach( (elem, i) => {
     });
 });
 
-
-
-
-// upgradeBuyBtn.forEach( (elem, i) => {
-
-//     // Upgrade cost
-//     const elemCost = elem.parentNode.childNodes[3].childNodes[1].textContent;
-
-//     // Upgrade listing
-//     const elemListing = elem.parentNode;
-
-//     elem.addEventListener('click', () => {
-//         console.log('Hello World!', i);
-//         if (score >= Number(elemCost)) {
-//             score -= Number(elemCost);
-//             scoreDisplay.textContent = `Score: ${score}`
-//             elemListing.classList.add('line-through');
-//             elem.parentNode.childNodes[3].classList.add('hide');
-//             elem.remove();
-
-//             applyUpgrades(i);
-
-//         }
-//     });
-// });
-
-
-// upgradeBuyBtn.addEventListener('click', () => {
-//     console.log('test!!!');
-//     if (score >= Number(upgradeCost.textContent)) {
-//         shopListing.classList.add('hide');
-//     }
-// });
-
-// setInterval(incrementScore, 1000, [autoIncrementAmt]);
 
 balloon.addEventListener('click', () => {
     balloon.classList.add('balloon-popped');
@@ -191,7 +162,3 @@ balloon.addEventListener('click', () => {
     updateShopListings();
 
 });
-
-// button.addEventListener('click', () => {
-//     null;
-// });
